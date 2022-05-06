@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>     
+
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=0.8, minimum-scale=0.8 user-scalable=no" />
+
+<title>Ecco 2 Password Generator</title>
+<meta name="description" content="" />
+
+<link rel="shortcut icon" type="image/png" href="/icon.png" />
+
+<meta property="og:locale" content="en_US" />
+<meta property="og:site_name" content="Ecco the Dolphin Online">
+<meta property="og:title" content="Ecco 2 Password Generator">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://eccothedolphin.online/ecco2-password-generator/card.png">
+<meta property="og:url" content="https://eccothedolphin.online/ecco2-password-generator">
+<meta property="twitter:card" content="summary_large_image">
+
+<link href="lib/style-2.css?v=1113202109" rel="stylesheet" type="text/css" />
+
+<script src="lib/user-interface.js?v=1113202109"></script>
+<script src="lib/web-sprite.js?v=1113202109"></script>
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="container_caption">
+
+        <a href="">         
+        <img src="resources/logo-glyph.svg" class="logo" alt="Ecco the Dolphin Online" /></a>
+
+
+    </div>
+
+<div class="container_body">
+<style>
+
+#display { display: block; margin: 0px auto 0px auto; width: 640px; height: 480px; image-rendering: pixelated; }
+#footer { display: none; }
+
+.uppercase { text-transform: uppercase; }
+
+.textin
+{
+    font-size: 12pt;
+    letter-spacing: 0.75pt;
+
+    background-color: #001142;
+    border: 1px solid #003382;
+    border-radius: 4px;
+    color: #bbbbcc;
+    overflow: auto;
+    padding: 4px 8px;
+    user-select: none;
+
+    width: 120px;
+}
+
+.preformatted { white-space: pre; }
+
+@media only screen and (min-width: 320px)
+{
+    #display
+    {
+        margin: 20px auto 20px auto;
+        height: 240px;
+        image-rendering: pixelated;
+        width: 320px;
+    }
+}
+
+@media only screen and (min-width: 640px)
+{
+    #display
+    {
+        display: block;
+        margin: 20px auto 20px auto;
+        width: 640px;
+        height: 480px;
+        image-rendering: pixelated;
+    }
+}
+
+</style>
+
+<p><canvas width='320' height='240' id='display'></canvas></p>
+
+<div id="panel_game" class="dialog invisible">
+<div class="dialog_caption">Game</div>
+        <div class='menu'>
+            <div id="menu_ecco2_game_01" class="menu3_item">Keep current settings...</div> 
+            <div id="menu_ecco2_game_02" class="menu3_item">About the Ecco Password Generator</div> 
+            <div id="menu_ecco2_game_03" class="menu3_item">Ecco 2: The Tides of Time for Mega Drive/Genesis/Sega CD</div>
+            <div class="menu_category">More Password Generators</div> 
+            <a href="../ecco-password-generator" class="menu3_item">Ecco the Dolphin</a>
+        </div>
+</div>
+
+<div id="panel_about" class="invisible">
+<div class="dialog">
+<div class="dialog_caption">About the Ecco 2 Password Generator</div>
+<div class="dialog_body_solid">
+
+    <h3 class="align_c">Ecco Password Generator</h3>
+    <p class="align_c bold">Beta Version 0.99.11132101</p>
+    <p class="align_c bold">Created by Johnny L. de Alba (The Collector)</p>
+
+    <h3>What is the Ecco Password Generator?</h3>
+    <p>The Ecco 2 Password Generator is a tool used for generating and decoding passwords from the 16-bit versions of Ecco 2 The Tides of Time.</p>
+    <h3>Which versions of Ecco 2: The Tides of Time does it currently support?</h3>
+    <p>&bullet; Ecco 2: The Tides of Time for Mega Drive/Genesis/Sega CD</p>
+
+</div>
+</div>
+
+    <div class="align_r">
+        <div id="ecco2_control_ok" class="control3">OK</div>
+    </div>
+</div>
+
+<div id="panel_ecco2_stage" class="dialog invisible">
+<div class="dialog_caption">Stage</div>
+    <div class='menu'>
+        <div id="menu_ecco2_stage_01" class="menu3_item">Keep current settings...</div> 
+        <div id="menu_ecco2_stage_02" class="menu3_item">Home Bay</div> 
+        <div id="menu_ecco2_stage_03" class="menu3_item">Crystal Springs</div> 
+        <div id="menu_ecco2_stage_04" class="menu3_item">Fault Zone</div> 
+        <div id="menu_ecco2_stage_05" class="menu3_item">Two Tides</div> 
+        <div id="menu_ecco2_stage_06" class="menu3_item">Trellia's Bay</div> 
+        <div id="menu_ecco2_stage_07" class="menu3_item">Sky Way</div> 
+        <div id="menu_ecco2_stage_08" class="menu3_item">Sky Tides</div> 
+        <div id="menu_ecco2_stage_09" class="menu3_item">Tube of Medusa</div> 
+        <div id="menu_ecco2_stage_10" class="menu3_item">Aqua Tubeway</div> 
+        <div id="menu_ecco2_stage_11" class="menu3_item">Skylands</div> 
+        <div id="menu_ecco2_stage_12" class="menu3_item">Fin to Feather</div> 
+        <div id="menu_ecco2_stage_13" class="menu3_item">Eagle's Bay</div> 
+        <div id="menu_ecco2_stage_14" class="menu3_item">Asterite's Cave</div> 
+        <div id="menu_ecco2_stage_15" class="menu3_item">The Lost Orcas</div> 
+        <div id="menu_ecco2_stage_16" class="menu3_item">Maze of Stone</div> 
+        <div id="menu_ecco2_stage_17" class="menu3_item">Four Islands</div> 
+        <div id="menu_ecco2_stage_18" class="menu3_item">Sea of Darkness</div> 
+        <div id="menu_ecco2_stage_19" class="menu3_item">Vents of Medusa</div> 
+        <div id="menu_ecco2_stage_20" class="menu3_item">Gateway</div> 
+        <div id="menu_ecco2_stage_21" class="menu3_item">Sea of Green</div> 
+        <div id="menu_ecco2_stage_22" class="menu3_item">Moray Abyss</div> 
+        <div id="menu_ecco2_stage_23" class="menu3_item">Asterite's Cave</div> 
+        <div id="menu_ecco2_stage_24" class="menu3_item">Sea of Birds</div> 
+        <div id="menu_ecco2_stage_25" class="menu3_item">The Eye</div> 
+        <div id="menu_ecco2_stage_26" class="menu3_item">Big Water</div> 
+        <div id="menu_ecco2_stage_27" class="menu3_item">Deep Ridge</div> 
+        <div id="menu_ecco2_stage_28" class="menu3_item">The Hungry Ones</div> 
+        <div id="menu_ecco2_stage_29" class="menu3_item">Secret Cave</div> 
+        <div id="menu_ecco2_stage_30" class="menu3_item">Lunar Bay</div> 
+        <div id="menu_ecco2_stage_31" class="menu3_item">Vortex Future</div> 
+        <div id="menu_ecco2_stage_32" class="menu3_item">Black Clouds</div> 
+        <div id="menu_ecco2_stage_33" class="menu3_item">Gravitor Box</div> 
+        <div id="menu_ecco2_stage_34" class="menu3_item">The Globe Holder</div> 
+        <div id="menu_ecco2_stage_35" class="menu3_item">Convergence</div> 
+        <div id="menu_ecco2_stage_36" class="menu3_item">Dark Sea</div> 
+        <div id="menu_ecco2_stage_37" class="menu3_item">New Machine</div> 
+        <div id="menu_ecco2_stage_38" class="menu3_item">Vortex Queen</div> 
+        <div id="menu_ecco2_stage_39" class="menu3_item">The Pod</div> 
+        <div id="menu_ecco2_stage_40" class="menu3_item">Epilogue</div> 
+        <div id="menu_ecco2_stage_41" class="menu3_item">Atlantis</div> 
+        <div id="menu_ecco2_stage_42" class="menu3_item">Fish City</div> 
+        <div id="menu_ecco2_stage_43" class="menu3_item">City of Forever</div> 
+        <div id="menu_ecco2_stage_44" class="menu3_item">Secret Password</div> 
+        <div id="menu_ecco2_stage_45" class="menu3_item">Inter</div> 
+        <div id="menu_ecco2_stage_46" class="menu3_item">Innuendo</div> 
+        <div id="menu_ecco2_stage_47" class="menu3_item">Trans</div> 
+        <div id="menu_ecco2_stage_48" class="menu3_item">Inside</div> 
+    </div>
+</div>
+
+<div id="panel_ecco2_difficulty" class="dialog invisible">
+<div class="dialog_caption">Difficulty</div>
+    <div class='menu'>
+        <div id="menu_ecco2_difficulty_01" class="menu3_item">Keep current settings...</div> 
+        <div id="menu_ecco2_difficulty_02" class="menu3_item">Normal Mode</div> 
+        <div id="menu_ecco2_difficulty_03" class="menu3_item">Easy Mode</div> 
+        <div id="menu_ecco2_difficulty_04" class="menu3_item">Hard Mode</div> 
+
+        <div class="invisible">
+            <div id="menu_ecco2_difficulty_05" class="menu3_item">Cheat Mode</div> 
+        </div>
+    </div>
+</div>
+
+<div id="panel_ecco2">
+<form>
+<div class="dialog">
+<div class="dialog_caption">Ecco 2 Password Generator</div>
+<div class="dialog_body">
+
+        <div class="dialog">
+        <div class="dialog_caption">Game</div>
+
+        <div class='menu'>
+
+            <div id="ecco2_control_game" class="menu3_item">
+                <img src="resources/angle-right.png" class="icon_xsmall float_r" />
+                <span id="ecco2_label_game"></span>
+            </div> 
+
+        </div>
+        </div>
+
+        <div class="dialog">
+        <div class="dialog_caption">Password Decoder</div>
+
+        <div class='menu'>
+            <div id="ecco2_control_password_decoded" class="menu">
+                <div class="menu3_item">
+                    <img src="resources/angle-right.png" class="icon_xsmall float_r" />
+                    <div id="ecco2_label_password_decoded" class="yellow float_r"></div>
+                    Decode Password
+                </div>
+            </div>
+
+            <div class="menu_item_static small">
+                Suggested Password
+                <div id="ecco2_label_password_suggestion" class="float_r align_r preformatted"></div>
+            </div>
+ 
+        </div>
+        </div>
+
+    <div class="align_c overflow">
+
+        <div class="width_50 float_l">
+        <div class="exhibit">
+            <canvas width="300" height="300" id="ecco2_asterite"></canvas>
+        </div>
+        </div>
+
+        <div id="ecco2_caption_title_screen" class="width_50 float_l invisible">
+        <div class="exhibit">
+            <img src="resources/caption/ecco2-title-screen.png" alt="" />
+        </div>
+        </div>
+        
+        <div id="ecco2_caption_home_bay" class="width_50 float_l invisible">
+        <div class="exhibit">
+            <img src="resources/caption/ecco2-home-bay.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco2_caption_trellias_bay" class="width_50 float_l invisible">
+        <div class="exhibit">
+            <img src="resources/caption/ecco2-trellias-bay.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco2_caption_sky_tides" class="width_50 float_l invisible">
+        <div class="exhibit">
+            <img src="resources/caption/ecco2-sky-tides.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco2_caption_tube_of_medusa" class="width_50 float_l invisible">
+        <div class="exhibit">
+            <img src="resources/caption/ecco2-tube-of-medusa.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco2_caption_aqua_tubeway" class="width_50 float_l invisible">
+        <div class="exhibit">
+            <img src="resources/caption/ecco2-aqua-tubeway.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco2_caption_fin_to_feather" class="width_50 float_l invisible">
+        <div class="exhibit">
+            <img src="resources/caption/ecco2-fin-to-feather.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco2_caption_dark_sea" class="width_50 float_l invisible">
+        <div class="exhibit">
+            <img src="resources/caption/ecco2-dark-sea.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco2_caption_vortex_future" class="width_50 float_l invisible">
+        <div class="exhibit">
+            <img src="resources/caption/ecco2-vortex-future.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco2_caption_globe_holder" class="width_50 float_l invisible">
+        <div class="exhibit">
+            <img src="resources/caption/ecco2-globe-holder.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco2_caption_vortex_queen" class="width_50 float_l invisible">
+        <div class="exhibit">
+            <img src="resources/caption/ecco2-vortex-queen.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco2_caption_city_of_forever" class="width_50 float_l invisible">
+        <div class="exhibit">
+            <img src="resources/caption/ecco2-city-of-forever.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco2_caption_tmachine" class="width_50 float_l invisible">
+        <div class="exhibit">
+            <img src="resources/caption/ecco2-tmachine.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco2_caption_secret_password" class="width_50 float_l invisible">
+        <div class="exhibit">
+            <img src="resources/caption/ecco2-secret-password.png" alt="" />
+        </div>
+        </div>
+
+    </div> 
+
+        <div class="dialog">
+        <div class="dialog_caption">Stage</div>
+        <div id="ecco2_control_stage" class="menu">
+            <div class="menu3_item">
+                <img src="resources/angle-right.png" class="icon_xsmall float_r" />
+                <span id="ecco2_label_stage">Home Bay</span>
+            </div>
+        </div>
+
+        <div class="dialog_category">Asterite Globe Audit</div>
+        <div class="menu">
+           <div class="menu_item_static small">
+                Globe Pairs <span id="ecco2_label_globe_pairs" class="yellow"></span>
+                <br /><br />
+                <div id="ecco2_control_globe_pairs" class="width_80 auto_margin"></div>
+            </div>
+           <div class="menu_item_static small">
+                Waveform <span id="ecco2_label_globe_waveform" class="yellow"></span>
+                <br /><br />
+                <div id="ecco2_control_globe_waveform" class="width_80 auto_margin"></div>
+            </div>
+            <div class="menu_item_static small">
+                Cycle <span id="ecco2_label_globe_cycle" class="yellow"></span>
+                <br /><br />
+                <div id="ecco2_control_globe_cycle" class="width_80 auto_margin"></div>
+            </div>
+ 
+        </div>
+
+        <div class="dialog_caption">Difficulty</div>
+        <div class="menu">
+
+            <div id="ecco2_control_difficulty" class="menu3_item">
+                <img src='resources/angle-right.png' class="icon_xsmall float_r" />
+                <span id="ecco2_label_difficulty"></span>
+            </div> 
+
+            <div id="ecco2_block_difficulty_normal" class="invisible">
+            <div class="menu_item_static small">
+                Difficulty Percentage <span id="ecco2_label_difficulty_percentage" class="yellow"></span>
+                <br /><br />
+                <div id="ecco2_control_difficulty_percentage" class="width_80 auto_margin"></div>
+            </div>
+
+            <div class="menu_item_static small">
+                <img id="ecco2_switch_difficulty_max_on" src="resources/switch-on.svg" class="icon_xlarge cursor_pointer float_r invisible" />
+                <img id="ecco2_switch_difficulty_max_off" src="resources/switch-off.svg" class="icon_xlarge cursor_pointer float_r" />
+                Enable Maximum Difficulty
+            </div>
+
+            <div class="menu_item_static small">
+                <img id="ecco2_switch_3dpoints_on" src="resources/switch-on.svg" class="icon_xlarge cursor_pointer float_r invisible" />
+                <img id="ecco2_switch_3dpoints_off" src="resources/switch-off.svg" class="icon_xlarge cursor_pointer float_r" />
+                Use 3D Stage Points System
+            </div>
+            </div>
+
+            <div id="ecco2_block_death_counter" class="invisible">
+            <div class="menu_item_static small invisible">
+                Death Counter <span id="ecco2_label_death_counter" class="yellow"></span>
+                <br /><br />
+                <div id="ecco2_control_death_counter" class="width_80 auto_margin"></div>
+            </div>
+            </div>
+
+            <div class="menu_item_static small">
+                <img id="ecco2_switch_cheat_mode_on" src="resources/switch-on.svg" class="icon_xlarge cursor_pointer float_r invisible" />
+                <img id="ecco2_switch_cheat_mode_off" src="resources/switch-off.svg" class="icon_xlarge cursor_pointer float_r" />
+                Cheat Mode Used
+            </div>
+  
+        </div>
+
+    </div>
+</div>
+
+<div class="dialog_category">Optional</div>
+<div class="dialog_body">
+
+    <div class="dialog">
+    <div class="dialog_caption">Elapsed Time</div>
+    <div class='menu'>
+        <div id="ecco2_control_time_elapsed" class="menu">
+            <div class="menu3_item">
+                <img src="resources/angle-right.png" class="icon_xsmall float_r" />
+                <div id="ecco2_label_time_elapsed" class="yellow float_r"></div>
+                Time
+            </div>
+        </div>
+
+        <div id="ecco2_control_total_seconds" class="menu">
+            <div class="menu3_item">
+                <img src="resources/angle-right.png" class="icon_xsmall float_r" />
+                <div id="ecco2_label_total_seconds" class="yellow float_r"></div>
+                Total Seconds
+            </div>
+        </div>
+
+        <div id="ecco2_control_total_frames" class="menu">
+            <div class="menu3_item">
+                <img src="resources/angle-right.png" class="icon_xsmall float_r" />
+                <div id="ecco2_label_total_frames" class="yellow float_r"></div>
+                Total Frames
+            </div>
+        </div>
+
+        <div class="menu_item_static">
+            <img id="ecco2_switch_50_frames_on" src="resources/switch-on.svg" class="icon_xlarge cursor_pointer float_r invisible" />
+            <img id="ecco2_switch_50_frames_off" src="resources/switch-off.svg" class="icon_xlarge cursor_pointer float_r" />
+            PAL Version (50 FPS)
+        </div>
+    </div>
+    </div>
+
+</div>
+</div>
+
+</form>
+</div>
+
+<div id="panel_keypad_numeric" class="keypad_numeric invisible">
+<div class="dialog">
+<div class="dialog_body align_c">
+    <div id="control_number_00" class="control2 ctrl_width_small">1</div>
+    <div id="control_number_01" class="control2 ctrl_width_small">2</div>
+    <div id="control_number_02" class="control2 ctrl_width_small">3</div>
+    <div id="control_number_03" class="control2 ctrl_width_small">4</div>
+    <div id="control_number_04" class="control2 ctrl_width_small">5</div>
+    <br />
+    <div id="control_number_05" class="control2 ctrl_width_small">6</div>
+    <div id="control_number_06" class="control2 ctrl_width_small">7</div>
+    <div id="control_number_07" class="control2 ctrl_width_small">8</div>
+    <div id="control_number_08" class="control2 ctrl_width_small">9</div>
+    <div id="control_number_09" class="control2 ctrl_width_small">0</div>
+    <br />
+    <div id="control_number_10" class="control2 ctrl_width_large">DEL</div>
+    <div id="control_number_11" class="control2 ctrl_width_large">ENTER</div>
+</div>
+</div>
+</div>
+
+<div id="panel_keypad_alpha" class="keypad_alpha invisible">
+<div class="dialog">
+<div class="dialog_body align_c">
+    <div id="control_alpha_00" class="control2 ctrl_width_small">Q</div>
+    <div id="control_alpha_01" class="control2 ctrl_width_small">W</div>
+    <div id="control_alpha_02" class="control2 ctrl_width_small">E</div>
+    <div id="control_alpha_03" class="control2 ctrl_width_small">R</div>
+    <div id="control_alpha_04" class="control2 ctrl_width_small">T</div>
+    <div id="control_alpha_05" class="control2 ctrl_width_small">Y</div>
+    <div id="control_alpha_06" class="control2 ctrl_width_small">U</div>
+    <div id="control_alpha_07" class="control2 ctrl_width_small">I</div>
+    <div id="control_alpha_08" class="control2 ctrl_width_small">O</div>
+    <div id="control_alpha_09" class="control2 ctrl_width_small">P</div>
+    <br />
+    <div id="control_alpha_10" class="control2 ctrl_width_small">A</div>
+    <div id="control_alpha_11" class="control2 ctrl_width_small">S</div>
+    <div id="control_alpha_12" class="control2 ctrl_width_small">D</div>
+    <div id="control_alpha_13" class="control2 ctrl_width_small">F</div>
+    <div id="control_alpha_14" class="control2 ctrl_width_small">G</div>
+    <div id="control_alpha_15" class="control2 ctrl_width_small">H</div>
+    <div id="control_alpha_16" class="control2 ctrl_width_small">J</div>
+    <div id="control_alpha_17" class="control2 ctrl_width_small">K</div>
+    <div id="control_alpha_18" class="control2 ctrl_width_small">L</div>
+    <br />
+    <div id="control_alpha_19" class="control2 ctrl_width_small">Z</div>
+    <div id="control_alpha_20" class="control2 ctrl_width_small">X</div>
+    <div id="control_alpha_21" class="control2 ctrl_width_small">C</div>
+    <div id="control_alpha_22" class="control2 ctrl_width_small">V</div>
+    <div id="control_alpha_23" class="control2 ctrl_width_small">B</div>
+    <div id="control_alpha_24" class="control2 ctrl_width_small">N</div>
+    <div id="control_alpha_25" class="control2 ctrl_width_small">M</div>
+    <br />
+    <div id="control_alpha_27" class="control2 ctrl_width_large">DEL</div>
+    <div id="control_alpha_26" class="control2 ctrl_width_large">SPACE</div>
+    <div id="control_alpha_28" class="control2 ctrl_width_large">ENTER</div>
+</div>
+</div>
+</div>
+
+<div id="panel_ecco2_decoder" class="invisible">
+        <div class="dialog_red">
+        <div class="dialog_caption_red">Decoder</div>
+
+        <div class='menu'>
+
+            <div class="menu_item_static_red small">
+                Error ID
+                <div id="ecco2_label_decoder_error_id" class="float_r align_r preformatted"></div>
+            </div>
+            <div class="menu_item_static_red small">
+                Unencrypted Data
+                <div id="ecco2_label_decoder_unencrypted_data" class="float_r align_r preformatted"></div>
+            </div>
+            <div class="menu_item_static_red small">
+                Suggested Password
+                <div id="ecco2_label_decoder_password_suggestion" class="float_r align_r preformatted"></div>
+            </div>
+ 
+            <div class="menu_item_static_red small">
+                Stage Name
+                <div id="ecco2_label_decoder_stage_name" class="float_r align_r preformatted"></div>
+            </div>
+            <div class="menu_item_static_red small">
+                Stage ID
+                <div id="ecco2_label_decoder_stage_id" class="float_r align_r preformatted"></div>
+            </div>
+             <div class="menu_item_static_red small">
+                Asterite Globe Pairs Collected
+                <div id="ecco2_label_decoder_globes_collected" class="float_r align_r preformatted"></div>
+            </div>
+             <div class="menu_item_static_red small">
+                Cheat Mode Used
+                <div id="ecco2_label_decoder_cheat_mode" class="float_r align_r preformatted"></div>
+            </div>
+            <div class="menu_item_static_red small">
+                Difficulty
+                <div id="ecco2_label_decoder_difficulty" class="float_r align_r preformatted"></div>
+            </div>
+
+            <div id="ecco2_block_decoder_difficulty_points">
+            <div class="menu_item_static_red small">
+                Difficulty %
+                <div id="ecco2_label_decoder_difficulty_points" class="float_r align_r preformatted"></div>
+            </div>
+            </div>
+
+            <div id="ecco2_block_decoder_death_counter">
+             <div class="menu_item_static_red small">
+                Death Counter
+                <div id="ecco2_label_decoder_death_counter" class="float_r align_r preformatted"></div>
+            </div>
+            </div>
+             <div class="menu_item_static_red small">
+                Time Elapsed: Total Seconds (NTSC Time)
+                <div id="ecco2_label_decoder_time_elapsed" class="float_r align_r preformatted"></div>
+            </div>
+            <div class="menu_item_static_red small">
+                Time Elapsed: Total Seconds (PAL Time)
+                <div id="ecco2_label_decoder_pal_time_elapsed" class="float_r align_r preformatted"></div>
+            </div>
+ 
+        </div>
+        <iv>
+</div>
+
+<script>
+
+W_SPRITE_ENABLE = -2;
+
+</script>
+
+
+<script type='text/javascript' src="progressbar-2.js?v=1113202109"></script>
+<script type='text/javascript' src="wave-generator.js?v=1113202109"></script>
+<script type='text/javascript' src="composition.js?v=1113202109"></script>
+<script type='text/javascript' src="plot.js?v=1113202109"></script>
+<script type='text/javascript' src="config.js?v=1113202109"></script>
+<script type='text/javascript' src="ecco-text-generator.js?v=1113202109"></script>
+<script type='text/javascript' src="ecco-password-lib.js?v=1113202109"></script>
+<script type='text/javascript' src="ecco-password-ui.js?v=1113202109"></script>
+<script type='text/javascript' src="ecco2-password-ui.js?v=1113202109"></script>
+<script type='text/javascript' src="ecco-password-generator.js?v=1113202109"></script>
+
+<script>
+
+function t_asterite()
+{
+    this.instance = null;
+    this.display = null;
+
+    this.program_counter = 0;
+    this.frame_counter = 0;
+    this.delay_total = 0;
+
+    this.x = 0;
+    this.y = 0;
+
+    this.vertical_spacing = 0;
+
+    this.globe_pairs = 0;
+    this.globe_waveform = 0;
+    this.globe_cycle = 0;
+
+    this.effect = 0;
+    this.frame = 0;
+
+    this.resource_index = 0;
+    this.resource_total = 0;
+
+    this.globe_priority = null
+    this.bitmap_globes = null;
+    this.bitmap_background = null;
+}
+
+function create_asterite()
+{
+    let ast = new t_asterite();
+
+    ast.instance = instance;
+
+    ast.display = document.getElementById("ecco2_asterite");
+    ast.background = new Image();
+
+    ast.bitmap_globes = new Array();
+
+    ast.bitmap_globes[0] = new Image();
+    ast.bitmap_globes[1] = new Image();
+    ast.bitmap_globes[2] = new Image();
+    ast.bitmap_globes[3] = new Image();
+
+    ast.resource_index = 0;
+    ast.resource_total = 0;
+
+    ast.x = 30;
+    ast.y = 40;
+
+    ast.vertical_spacing = 10;
+
+    ast.center_x = (300/2);
+
+    ast.globe_priority = new Array();
+
+    for (index = 0; index < 24; index++)
+        ast.globe_priority[index] = 0;
+
+    ast.background.src = "resources/ecco2-asterite-background.png";
+    ast.resource_total++;
+
+    ast.background.addEventListener("load", (event) => {
+        ast.resource_index++;
+    });
+
+    ast.bitmap_globes[0].src = "resources/globes/ecco2-globe-red-small.png";
+    ast.resource_total++;
+
+    ast.bitmap_globes[0].addEventListener("load", () => {
+        ast.resource_index++;
+    });
+
+    ast.bitmap_globes[1].src = "resources/globes/ecco2-globe-brown-small.png";
+    ast.resource_total++;
+
+    ast.bitmap_globes[1].addEventListener("load", () => {
+        ast.resource_index++;
+    });
+
+    ast.bitmap_globes[2].src = "resources/globes/ecco2-globe-purple-small.png";
+    ast.resource_total++;
+
+    ast.bitmap_globes[2].addEventListener("load", () => {
+        ast.resource_index++;
+    });
+
+
+    ast.bitmap_globes[3].src = "resources/globes/ecco2-globe-green-small.png";
+    ast.resource_total++;
+
+    ast.bitmap_globes[3].addEventListener(
+        "load", () => { ast.resource_index++; });
+
+    ast.program_counter = (1000 | 0x8000);
+    ast.frames_per_second = 60;    
+
+    handler_update_frame(ast);
+}
+
+function handler_update_frame(ast)
+{
+    if (ast.resource_index != ast.resource_total)
+    {
+        requestAnimationFrame(() => { handler_update_frame(ast); });
+        return;
+    }
+
+    if (ast.program_counter & 0x8000)
+    {
+        ast.program_counter&= 0x7fff;
+
+        // console.log(ast.program_counter);
+        // console.log(ast.frame_counter);
+
+        if (ast.frames_per_second != 60)
+            ast.delay_total = ast.program_counter/ast.frames_per_second;
+
+        ast.program_counter = 0;
+        ast.frame_counter = 0;
+
+        setTimeout(() => { ast.program_counter|= 0x8000; }, 1000);
+    }
+
+    ast.program_counter++;
+
+    if ((ast.program_counter & 0x7fff) >= (ast.frame_counter * ast.delay_total))
+    {
+        update_asterite(ast);
+        ast.frame_counter++;
+ 
+        requestAnimationFrame(() => { handler_update_frame(ast); });
+        return;
+    }
+    
+    requestAnimationFrame(() => { handler_update_frame(ast); });
+}
+
+function update_asterite(ast)
+{
+    let context = null;
+
+    let wg = null;
+    let offset_table = null;
+
+    let index = 0;
+    let offset = 0, position_x = 0;
+
+    let globe_waveform = ast.instance.ecco2_session.globe_waveform;
+    let globe_cycle = ast.instance.ecco2_session.globe_cycle;
+
+    ast.globe_pairs = ast.instance.ecco2_session.globe_pairs;
+    // ast.globe_pairs--;
+
+    context = ast.display.getContext('2d');
+    context.imageSmoothingEnabled = false;
+
+    context.drawImage(ast.background, 0, 0);
+    if (ast.globe_pairs == 0) return;
+
+    wg = create_wave_generator(SINEWAVE_TABLE_ID, globe_cycle);
+    offset_table = process_wave_generator(wg, ast.frame);
+
+    // waveform == 4
+
+    for (index = 0; index < 25; index++)
+    {
+        if (index > (24 - ast.globe_pairs))
+        {
+            offset_x = offset_table[(index * globe_waveform) & 0xff];
+            position_x = offset_x + ast.x;
+
+            if ((-offset_x) > 56)
+                ast.globe_priority[index] = 0;
+            else if ((-offset_x) <= 8) 
+                ast.globe_priority[index] = 1;
+
+            if (ast.globe_priority[index] == 1)
+            {
+                context.drawImage(
+                    ast.bitmap_globes[index % 4],
+                    position_x + ast.center_x,
+                    ast.y + (index * ast.vertical_spacing)
+                );
+
+                context.drawImage(
+                    ast.bitmap_globes[(index + 2) % 4],
+                    -position_x + ast.center_x,
+                    ast.y + (index * ast.vertical_spacing)
+                );
+            }
+            else
+            {
+                context.drawImage(
+                    ast.bitmap_globes[(index + 2) % 4],
+                    -position_x + ast.center_x,
+                    ast.y + (index * ast.vertical_spacing)
+                );
+
+                context.drawImage(
+                    ast.bitmap_globes[index % 4],
+                    position_x + ast.center_x,
+                    ast.y + (index * ast.vertical_spacing));
+            }
+ 
+        }
+    }
+
+    ast.frame++;
+    ast.frame&= 0xff;
+}
+
+let ast = create_asterite();
+
+</script>
+
+
+
+
+<div id="footer" class="dialog">
+<div class="dialog_body align_c">
+
+<div class="small">
+    <a href="https://eccothedolphin.online/about">About</a> &nbsp;&nbsp;
+    <a href="https://eccothedolphin.online/join-our-community-on-discord">Join Our Community</a> &nbsp;&nbsp;
+    <a href="https://twitter.com/eccoonline">Twitter</a> &nbsp;&nbsp;
+    <a href="https://www.facebook.com/eccoonline">Facebook</a> &nbsp;&nbsp;
+    <a href="https://www.deviantart.com/ecco-online">DeviantArt</a> &nbsp;&nbsp;
+    <a href="https://discord.com/invite/ahCvaUB">Discord</a> &nbsp;&nbsp;
+</div>
+
+<br />
+<div class="xsmall">
+<p>Ecco the Dolphin and all related characters/intellectual property are © <a href="https://sega.com">Service Games (SEGA)</a>.
+<br />Ecco the Dolphin was created by <a href="https://twitter.com/edannunziatta">Ed Annunziatta</a>.</p>
+
+<p>Ecco the Dolphin Online is a fan operated site that specializes in content related to the Ecco the Dolphin franchise. We are in no way affiliated with the official sources or copyright holders.</p>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+
+<script>
+process_web_sprites("");
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="82.550003mm"
+   height="3.1750021mm"
+   viewBox="0 0 82.550003 3.1750021"
+   version="1.1"
+   id="svg2486"
+   inkscape:export-filename="C:\www\ecco-password-generator-0720\resources\switch-on.png"
+   inkscape:export-xdpi="300"
+   inkscape:export-ydpi="300"
+   sodipodi:docname="sliderbar-grey.svg"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs2480" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.5209932"
+     inkscape:cx="171.26967"
+     inkscape:cy="104.86569"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1680"
+     inkscape:window-height="987"
+     inkscape:window-x="242"
+     inkscape:window-y="1072"
+     inkscape:window-maximized="1"
+     inkscape:pagecheckerboard="0" />
+  <metadata
+     id="metadata2483">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(36.004172,-42.152082)">
+    <rect
+       style="fill:#444444;fill-opacity:1;stroke-width:0.17225"
+       id="rect1319"
+       width="79.375"
+       height="3.175"
+       x="-34.416672"
+       y="42.152084" />
+    <circle
+       style="fill:#444444;fill-opacity:1;fill-rule:evenodd;stroke-width:0.0565985"
+       id="path845"
+       cx="-34.416672"
+       cy="43.739582"
+       r="1.5875" />
+    <circle
+       style="fill:#444444;fill-opacity:1;fill-rule:evenodd;stroke-width:0.0565985"
+       id="path845-5"
+       cx="44.958328"
+       cy="43.739582"
+       r="1.5875" />
+  </g>
+</svg>

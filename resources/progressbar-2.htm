@@ -1,0 +1,274 @@
+<html
+<head>
+<meta charset="UTF-8"/>
+</head>
+<body>
+
+<div id="progressbar" style="text-align: center;"></div>
+
+</body>
+</html>
+<script>
+
+const PB_BLOCK_W = 1;
+const PB_BLOCK_H = 12;
+const PB_SIDE_W = 12;
+const PB_SIDE_H = 12;
+const PB_TICK_W = 2;
+const PB_TICK_H = 28;
+const PB_POINTER_W = 20;
+const PB_POINTER_H = 20;
+
+const PB_STENCIL_LEFT = 0;
+const PB_STENCIL_RIGHT = 1;
+const PB_STENCIL_BLOCK = 2;
+const PB_STENCIL_TICK = 3;
+const PB_STENCIL_LEFTHL = 4;
+const PB_STENCIL_RIGHTHL = 5;
+const PB_STENCIL_BLOCKHL = 6;
+const PB_STENCIL_TICKHL = 7;
+const PB_STENCIL_POINTER = 8;
+
+
+function pb_default_stencil_table()
+{
+    let table = [
+        "resources/progressbar-left.svg",
+        "resources/progressbar-right.svg",
+        "resources/progressbar-block.svg",
+        "resources/progressbar-tick.svg",
+        "resources/progressbar-left-highlighted.svg",
+        "resources/progressbar-right-highlighted.svg",
+        "resources/progressbar-block-highlighted.svg",
+        "resources/progressbar-tick-highlighted.svg",
+        "resources/progressbar-pointer.svg"
+    ];
+
+    return table;  
+}
+
+function t_progressbar()
+{
+    this.side_w = PB_SIDE_W;
+    this.side_h = PB_SIDE_H;
+    this.block_w = PB_BLOCK_W;
+    this.block_h = PB_BLOCK_H;
+    this.tick_w = PB_TICK_W;
+    this.tick_h = PB_TICK_H;
+    this.pointer_H = PB_POINTER_H;
+    this.pointer_H = PB_POINTER_H;
+    this.padding_top = (PB_TICK_H - PB_SIDE_H)/2;
+    this.padding_left = (PB_POINTER_W - PB_SIDE_W)/2;
+
+    this.pointer_x = 0;
+    this.pointer_index = 0;
+
+    this.width = 0;
+    this.inner_width = 0;
+
+    this.container_id = "";
+    this.container = null;
+    this.bitmap = null;
+
+    this.resource_index = 0;
+    this.resource_total = 0;
+   
+    this.r_tick_x = null;
+    this.r_tick_enabled = null; 
+    this.r_stencil = null;
+}
+
+function pb_stencil_array(pb)
+{
+    let table = pb_default_stencil_table();
+    let stencil = new Array();
+    let index = 0;
+
+    for (index = 0; index < table.length; index++)
+    {
+        stencil[index] = new Image();
+        stencil[index].src = table[index];
+
+        stencil[index].addEventListener("load", (event) => {
+            pb.resource_index++; });
+
+        pb.resource_total++;
+    }
+
+    pb.r_stencil = stencil;
+}
+
+function pb_destroy_bitmap(pb)
+{
+    if (pb.bitmap == null) return;
+    
+    pb.container.removeChild(pb.bitmap);
+    pb.bitmap.remove();
+    pb.bitmap = null;
+}
+
+function pb_create_bitmap(pb, width)
+{
+    pb_destroy_bitmap(pb);
+
+    let bitmap = document.createElement("canvas");
+
+    bitmap.width = width;
+    bitmap.height = pb.tick_h;
+
+    pb.width = width;
+    pb.inner_width = width - (pb.padding_left*2);
+    pb.bitmap = bitmap;
+    pb.container.appendChild(pb.bitmap);
+}
+
+function pb_tick_x_array(pb)
+{
+    let index = 0;
+    pb.r_tick_x = new Array();
+
+    for (index = 0; index < pb.tick_total; index++)
+        pb.r_tick_x[index] = 0;
+}
+
+function pb_tick_enabled_array(pb)
+{
+    let index = 0;
+    pb.r_tick_enabled = new Array();
+
+    for (index = 0; index < pb.tick_total; index++)
+        pb.r_tick_enabled[index] = 1;
+}
+
+function pb_update_tick_x_array(pb)
+{
+    let inner_width = pb.inner_width - pb.side_w;
+    let padding_left = pb.padding_left + ((pb.side_w - pb.tick_w)/2);
+
+    let tick_spacing = inner_width/(pb.tick_total - 1);
+    let last_index = pb.tick_total - 1;
+
+    let index = 0, x = 0;
+
+    for (index = 0; index < pb.tick_total; index++)
+    {
+        x = (index * tick_spacing) + padding_left;
+        if (index == last_index)
+            x = inner_width + padding_left;
+
+        x = Math.trunc(x);
+        pb.r_tick_x[index] = x;
+    }
+}
+
+function pb_tick_render_all(pb)
+{
+    let context = pb.bitmap.getContext("2d");
+    let index = 0, position_x = 0;
+ 
+    context.imageSmoothingEnabled = false;
+
+    for(index = 0; index < pb.tick_total; index++)
+    {
+        if (pb.r_tick_enabled[index] == 0)
+            continue;
+
+        position_x = pb.r_tick_x[index];
+        context.drawImage(pb.r_stencil[PB_STENCIL_TICK], position_x, 0);
+    }
+}
+
+function pb_block_render_all(pb)
+{
+    let context = pb.bitmap.getContext("2d");
+    let total_width = pb.inner_width - pb.side_w;
+    let index = 0, position_x = 0;
+ 
+    context.imageSmoothingEnabled = false;
+
+    position_x = pb.padding_left;
+    context.drawImage(pb.r_stencil[PB_STENCIL_LEFT], position_x, pb.padding_top);
+
+    index = pb.side_w;
+    while(index < total_width)
+    {
+        position_x = pb.padding_left + index;
+        context.drawImage(pb.r_stencil[PB_STENCIL_BLOCK], position_x, pb.padding_top);
+
+        index+= 1;
+    }
+ 
+    position_x = pb.padding_left + pb.inner_width - pb.side_w;
+    context.drawImage(pb.r_stencil[PB_STENCIL_RIGHT], position_x, pb.padding_top); 
+}
+
+function pb_blockhl_render_all(pb, width)
+{
+    if (width < pb.side_w) return;
+
+    let context = pb.bitmap.getContext("2d");
+    let total_width = pb.inner_width - pb.side_w;
+    let index = 0, position_x = 0;
+
+    if (width > total_width)
+        width = total_width; 
+ 
+    context.imageSmoothingEnabled = false;
+
+    position_x = pb.padding_left;
+    context.drawImage(pb.r_stencil[PB_STENCIL_LEFTHL], position_x, pb.padding_top);
+
+    index = pb.side_w;
+    while(index < width)
+    {
+        position_x = pb.padding_left + index;
+        context.drawImage(pb.r_stencil[PB_STENCIL_BLOCKHL], position_x, pb.padding_top);
+
+        index+= 1;
+    }
+
+    if (width >= total_width)
+    { 
+        position_x = pb.padding_left + pb.inner_width - pb.side_w;
+        context.drawImage(pb.r_stencil[PB_STENCIL_RIGHTHL], position_x, pb.padding_top); 
+    }
+}
+
+function pb_listener_ready(pb)
+{
+    if (pb.resource_index < pb.resource_total)
+    {
+        setTimeout(() => { pb_listener_ready(pb); }, 1000);
+        return;
+    }
+
+    // resize or validate
+    pb_create_bitmap(pb, 600);
+    pb_update_tick_x_array(pb);
+
+    // render or update
+    pb_tick_render_all(pb);
+    pb_block_render_all(pb);
+    pb_blockhl_render_all(pb, 96);
+}
+
+function create_progressbar(container_id, max_width, tick_total)
+{
+    let pb = new t_progressbar();
+
+    pb.container_id = container_id;
+    pb.container = document.getElementById(container_id);
+    pb.tick_total = tick_total;
+
+    pb_tick_x_array(pb);
+    pb_tick_enabled_array(pb);
+    pb_stencil_array(pb);
+
+    setTimeout(() => { pb_listener_ready(pb); }, 1000);
+
+    return pb;
+}
+
+let progressbar = create_progressbar("progressbar", 0, 32);
+
+</script>
