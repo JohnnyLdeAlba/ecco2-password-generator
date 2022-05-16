@@ -1,4 +1,4 @@
-# ecco2-password-generator
+# Ecco 2: Password Generator 
 A password generator for the Sega Genesis and Sega CD versions of Ecco 2: The Tides of Time.
 
 # How Was This Made?
