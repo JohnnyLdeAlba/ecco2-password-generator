@@ -3,7 +3,7 @@ A password generator for the Sega Genesis and Sega CD versions of Ecco 2: The Ti
 
 # How Was This Made?
 
-This password generator was built by disaaembling the games code and porting it from 68000 assembly to Javascript.
+This password generator was built by disassembling the games code and porting it from 68000 assembly to Javascript.
 
 As a little bit of extra spice, the password screen animation used in the generator incorporates a ripple effect that is also an algorithm
 ported from the original games!
