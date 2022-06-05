@@ -1,7 +1,7 @@
 # Ecco 2: Password Generator 
 A password generator for the Sega Genesis and Sega CD versions of Ecco 2: The Tides of Time.
 
-<img style="height: 400px;" src="https://raw.githubusercontent.com/JohnnyLdeAlba/ecco2-password-generator/master/ecco2-password-website.png" />
+<img style="height: 400px;" src="https://raw.githubusercontent.com/JohnnyLdeAlba/ecco2-password-generator/master/ecco2-password-ui.png" />
 
 # How Was This Made?
 
